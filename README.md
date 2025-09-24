@@ -1,124 +1,132 @@
-Todo App
+# Todo App
 
-This is a full-stack Todo application built with Next.js for the frontend and a Node/Express or custom backend for handling tasks. The project allows users to add, update, and view tasks with status tracking.
+This is a **full-stack Todo application** built with **Next.js** for the frontend and a **Node/Express backend**. Users can add, update, and view tasks with status tracking.
 
-Features
+---
 
-Add, update, and delete tasks
+## Features
 
-Track task status: Complete or Incomplete
+- Add, update, and delete tasks  
+- Track task status: `Complete` or `Incomplete`  
+- Optional task descriptions  
+- Frontend built with Next.js (App Router)  
+- Backend API for storing tasks (MongoDB compatible)  
+- Responsive design
 
-Optional task descriptions
+---
 
-Frontend built with Next.js (App Router)
+## Tech Stack
 
-Backend API for storing tasks (MongoDB compatible)
+- **Frontend:** Next.js 15+, TypeScript, React  
+- **Backend:** Node.js / Express  
+- **Database:** MongoDB  
+- **Hosting:** Vercel (frontend), backend can run locally
 
-Responsive design and optimized build for production
+---
 
-Tech Stack
+## Project Structure
 
-Frontend: Next.js 15+, TypeScript, React
-
-Backend: Node.js / Express (or server folder)
-
-Database: MongoDB (or any preferred database)
-
-Hosting / Deployment: Vercel for frontend, backend can run locally or on any cloud
-
-Project Structure
+```
 project-root/
 ├─ src/
-│  ├─ app/                # Next.js pages and components
+│  ├─ app/              
 │  │  ├─ add-task/
 │  │  ├─ update-task/
 │  │  └─ components/
-│  └─ types/              # TypeScript interfaces (Task.ts)
-├─ server/                 # Backend source code
+│  └─ types/             
+├─ server/               
 ├─ package.json
 ├─ tsconfig.json
 └─ README.md
+```
 
-Getting Started
-1. Clone the repository
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/Karrycoder007/todo-app-task-.git
 cd todo-app-task-
+```
 
-2. Install dependencies
+### 2. Install dependencies
+
+```bash
 npm install
-# or
-yarn
-# or
-pnpm install
+# or yarn
+```
 
-3. Run development server
+### 3. Run development server
+
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
 
+Open [http://localhost:3000](http://localhost:3000)
 
-Open http://localhost:3000
- to see the app.
+---
 
-4. Running Backend (if separate)
+### 4. Running Backend
 
-If your backend is in the server/ folder:
-
+```bash
 cd server
 npm install
 npm run dev
+```
 
+> Set your **MongoDB URI** in `.env` file
 
-Make sure to set your database connection (e.g., MongoDB URI) in an .env file.
+---
 
-Build for Production
+## Build for Production
+
+```bash
 npm run build
 npm start
+```
 
+---
 
-This will generate an optimized production build for Vercel deployment.
+## Environment Variables
 
-Environment Variables
-
-Create a .env file in your root or server folder and add the following:
-
+```env
 MONGODB_URI=your_mongodb_connection_string
 PORT=5000
+```
 
+---
 
-Update values based on your environment.
+## Backend API Endpoints
 
-Backend API Endpoints
-Method	Endpoint	Description
-GET	/api/tasks	Get all tasks
-POST	/api/tasks	Add a new task
-GET	/api/tasks/:id	Get a single task
-PUT	/api/tasks/:id	Update a task
-DELETE	/api/tasks/:id	Delete a task
-Learn More
+| Method | Endpoint          | Description          |
+|--------|-----------------|--------------------|
+| GET    | `/api/tasks`     | Get all tasks       |
+| POST   | `/api/tasks`     | Add a new task      |
+| GET    | `/api/tasks/:id` | Get a single task   |
+| PUT    | `/api/tasks/:id` | Update a task       |
+| DELETE | `/api/tasks/:id` | Delete a task       |
 
-Next.js Documentation
+---
 
-Next.js Learn
+## Learn More
 
-Vercel Deployment Docs
+- [Next.js Documentation](https://nextjs.org/docs)  
+- [Vercel Deployment Docs](https://nextjs.org/docs/app/building-your-application/deploying)
 
-Contributing
+---
 
-Fork the repository
+## Contributing
 
-Create a new branch (git checkout -b feature/your-feature)
+1. Fork the repo  
+2. Create a new branch  
+3. Make changes  
+4. Commit & push  
+5. Open a pull request
 
-Make your changes
+---
 
-Commit (git commit -m "Add some feature")
+## License
 
-Push (git push origin feature/your-feature)
-
-Create a pull request
-
-License
-
-This project is MIT licensed.
+MIT
