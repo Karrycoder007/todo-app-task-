@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Task } from "../types/task";
+import { Task } from "./types/task";
 
 export default function HomePage() {
   const router = useRouter();

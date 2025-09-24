@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2020", // modern JS
-    "module": "CommonJS", // Node-friendly module system
-    "outDir": "./server", // compiled JS output
-    "rootDir": "./server", // source folder for backend
+    "target": "ES2020",
+    "module": "ESNext",
     "strict": true,
-    "esModuleInterop": true, // allow default imports for CJS modules
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -16,7 +14,6 @@
       "esnext"
     ],
     "allowJs": true,
-    "noEmit": true,
     "incremental": true,
     "moduleResolution": "node",
     "jsx": "preserve",
@@ -24,12 +21,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "noEmit": true
   },
   "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "server/**/*.ts",
     ".next/types/**/*.ts"
-  ], // include only backend folder
+  ],
   "exclude": [
     "node_modules"
   ]
