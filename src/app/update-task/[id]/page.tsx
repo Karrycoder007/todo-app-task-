@@ -17,8 +17,9 @@ export default function UpdateTaskPage() {
 
   useEffect(() => {
     async function fetchTask() {
+      if (!taskId) return;
       try {
-        const res = await fetch(`http://localhost:5000/tasks/${taskId}`);
+        const res = await fetch(`/api/tasks?id=${taskId}`);
         if (!res.ok) throw new Error('Failed to fetch task');
         const data: Task = await res.json();
         setTask(data);
@@ -30,14 +31,14 @@ export default function UpdateTaskPage() {
         alert('Failed to fetch task');
       }
     }
-    if (taskId) fetchTask();
+    fetchTask();
   }, [taskId]);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+      const res = await fetch(`/api/tasks?id=${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description, status }),
@@ -47,24 +48,24 @@ export default function UpdateTaskPage() {
     } catch (err) {
       console.error(err);
       alert('Failed to update task');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleDelete = async () => {
     if (!confirm('Are you sure you want to delete this task?')) return;
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/tasks/${taskId}`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(`/api/tasks?id=${taskId}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Failed to delete task');
       router.push('/');
     } catch (err) {
       console.error(err);
       alert('Failed to delete task');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (!task)
@@ -128,7 +129,7 @@ export default function UpdateTaskPage() {
           gap: 22,
         }}
       >
-        {/* Name + status toggle */}
+        {/* Name + Status */}
         <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
           <button
             type="button"
@@ -192,7 +193,7 @@ export default function UpdateTaskPage() {
           }}
         />
 
-        {/* Update button */}
+        {/* Update Button */}
         <button
           type="submit"
           disabled={loading}
@@ -211,7 +212,7 @@ export default function UpdateTaskPage() {
           {loading ? 'Saving...' : 'Update Task'}
         </button>
 
-        {/* Delete button */}
+        {/* Delete Button */}
         <button
           type="button"
           onClick={handleDelete}

@@ -15,7 +15,8 @@ export default function HomePage() {
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/tasks');
+      const res = await fetch('/api/tasks'); // <- use API route
+      if (!res.ok) throw new Error('Failed to fetch tasks');
       const data = await res.json();
       setTasks(data);
     } catch (err) {
