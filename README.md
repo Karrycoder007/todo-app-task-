@@ -101,26 +101,10 @@ npm start
 
 ---
 
-## Environment Variables
-
-```env
-MONGODB_URI=your_mongodb_connection_string
-PORT=5000
-```
 
 ---
 
-## Backend API Endpoints
 
-| Method | Endpoint          | Description          |
-|--------|-----------------|--------------------|
-| GET    | `/api/tasks`     | Get all tasks       |
-| POST   | `/api/tasks`     | Add a new task      |
-| GET    | `/api/tasks/:id` | Get a single task   |
-| PUT    | `/api/tasks/:id` | Update a task       |
-| DELETE | `/api/tasks/:id` | Delete a task       |
-
----
 
 ## Learn More
 
