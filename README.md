@@ -10,7 +10,6 @@ This is a **full-stack Todo application** built with **Next.js** for the fronten
 - Track task status: `Complete` or `Incomplete`  
 - Optional task descriptions  
 - Frontend built with Next.js (App Router)  
-- Backend API for storing tasks (MongoDB compatible)  
 - Responsive design
 
 ---
@@ -19,7 +18,6 @@ This is a **full-stack Todo application** built with **Next.js** for the fronten
 
 - **Frontend:** Next.js 15+, TypeScript, React  
 - **Backend:** Node.js / Express  
-- **Database:** MongoDB  
 - **Hosting:** Vercel (frontend), backend can run locally
 
 ---
