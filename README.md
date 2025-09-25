@@ -49,7 +49,7 @@ project-root/
 ![Add Task](public/add.png)
 
 **Update Task Page**  
-![Update Task](public/update.png)
+![Update Task](public/upadte.png)
 
 
 ## Getting Started
