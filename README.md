@@ -45,13 +45,13 @@ project-root/
 ## Screenshots
 
 **Homepage / Task List**  
-![Homepage](/homepage.png)
+![Homepage](/home.png)
 
 **Add Task Page**  
-![Add Task](/add-task.png)
+![Add Task](/add.png)
 
 **Update Task Page**  
-![Update Task](/update-task.png)
+![Update Task](/update.png)
 
 
 ## Getting Started
