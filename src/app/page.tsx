@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Task } from './types/task';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Task } from "./types/task";
 
 export default function HomePage() {
   const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(false);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<'All' | 'Complete' | 'Incomplete'>('All');
 
@@ -15,10 +16,10 @@ export default function HomePage() {
     setLoading(true);
     try {
       const res = await fetch('/api/tasks');
-      const data: Task[] = await res.json();
+      const data = await res.json();
       setTasks(data);
     } catch (err) {
-      console.error(err);
+      console.error('Error fetching tasks:', err);
     } finally {
       setLoading(false);
     }
@@ -28,41 +29,106 @@ export default function HomePage() {
     fetchTasks();
   }, []);
 
-  const filteredTasks = tasks.filter(task => {
+  const handleView = (id: string) => {
+    router.push(`/update-task/${id}`);
+  };
+
+  const filteredTasks = tasks.filter((task) => {
     if (filterStatus !== 'All' && task.status !== filterStatus) return false;
     const search = searchTerm.toLowerCase();
-    return task.name.toLowerCase().includes(search) || task.description?.toLowerCase().includes(search);
+    if (!task.name.toLowerCase().includes(search) && !task.description?.toLowerCase().includes(search)) return false;
+    return true;
   });
 
   return (
-    <main style={{ minHeight: '100vh', padding: 48, backgroundColor: '#2b2b2b', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 36, textAlign: 'center' }}>TODO <span style={{ color: '#2b79a9' }}>LIST</span></h1>
+    <main className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-12 box-border">
+      <h1 className="text-4xl font-extrabold mb-12 text-center">
+        <span className="text-white">TODO</span>{" "}
+        <span className="text-blue-600">LIST</span>
+      </h1>
 
-      <div style={{ display: 'flex', gap: 16, marginBottom: 28, width: '100%', maxWidth: 820 }}>
-        <input type="text" placeholder="Search tasks..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} style={{ flex: 1, padding: '16px 20px', borderRadius: 20, border: 'none', background: '#1f1f1f', color: '#f5f8f3' }} />
-        <select value={filterStatus} onChange={e => setFilterStatus(e.target.value as 'All' | 'Complete' | 'Incomplete')} style={{ padding: '16px 20px', borderRadius: 20, border: 'none', background: '#1f1f1f', color: '#f5f8f3' }}>
+      {/* Search & Filter */}
+      <div className="flex gap-4 mb-8 w-full max-w-3xl">
+        <input
+          type="text"
+          placeholder="Search tasks..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex-1 px-5 py-4 rounded-2xl bg-gray-800 text-white text-base shadow-lg outline-none"
+        />
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value as 'All' | 'Complete' | 'Incomplete')}
+          className="px-5 py-4 rounded-2xl bg-gray-800 text-white text-base shadow-lg outline-none"
+        >
           <option value="All">All</option>
           <option value="Complete">Complete</option>
           <option value="Incomplete">Incomplete</option>
         </select>
       </div>
 
-      <div style={{ width: '100%', maxWidth: 820, display: 'flex', flexDirection: 'column', gap: 22 }}>
-        {loading ? <div>Loading tasks...</div> :
-          filteredTasks.length === 0 ? <div>No tasks found</div> :
-          filteredTasks.map(task => (
-            <div key={task._id} style={{ padding: 20, borderRadius: 16, background: '#fff', color: '#111', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div>
-                <div style={{ fontWeight: 700 }}>{task.name}</div>
-                <div style={{ fontSize: 14, color: '#666' }}>{task.description || 'No description'}</div>
+      {/* Tasks */}
+      <div className="flex flex-col gap-6 w-full max-w-3xl">
+        {loading ? (
+          <div className="text-gray-400">Loading tasks...</div>
+        ) : filteredTasks.length === 0 ? (
+          <div className="text-gray-400">No tasks found.</div>
+        ) : (
+          filteredTasks.slice(0, 4).map((task) => (
+            <div
+              key={task._id}
+              className="flex items-center justify-between bg-white text-gray-900 p-5 rounded-2xl shadow-lg relative"
+            >
+              <div className="flex items-center gap-4 flex-1 min-w-0">
+                {/* Tick / Cross */}
+                <div
+                  className={`w-10 h-10 flex items-center justify-center rounded-full ${
+                    task.status === 'Complete' ? 'bg-green-500' : 'bg-red-500'
+                  } text-white text-lg font-bold`}
+                >
+                  {task.status === 'Complete' ? '✔' : '✖'}
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-lg truncate">{task.name}</div>
+                  <div
+                    className="text-gray-500 text-sm truncate"
+                    title={task.description || ''}
+                  >
+                    {task.description || 'No description'}
+                  </div>
+                </div>
               </div>
-              <button onClick={() => router.push(`/update-task/${task._id}`)} style={{ backgroundColor: '#2b79a9', color: '#fff', padding: '6px 12px', borderRadius: 8 }}>VIEW</button>
+
+              <button
+                onClick={() => handleView(task._id)}
+                className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-blue-700 transition"
+              >
+                VIEW
+              </button>
             </div>
           ))
-        }
+        )}
       </div>
 
-      <button onClick={() => router.push('/add-task')} style={{ marginTop: 24, padding: '14px 32px', borderRadius: 12, backgroundColor: '#2b79a9', color: '#fff', fontWeight: 700 }}>Add Task</button>
+      {/* View All */}
+      <button
+        onClick={() => router.push('/all')}
+        className="mt-6 text-white underline text-base"
+      >
+        View All
+      </button>
+
+      {/* Add Todo */}
+      <button
+        onClick={() => router.push('/add-task')}
+        className="mt-6 bg-blue-600 px-8 py-4 rounded-xl text-white font-bold flex items-center gap-2 shadow-lg hover:bg-blue-700 transition"
+      >
+        <span>Add Todo</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </main>
   );
 }
