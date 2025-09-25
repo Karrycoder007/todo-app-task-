@@ -10,7 +10,6 @@ This is a **full-stack Todo application** built with **Next.js** for the fronten
 - Track task status: `Complete` or `Incomplete`  
 - Optional task descriptions  
 - Frontend built with Next.js (App Router)  
-- Backend API for storing tasks (MongoDB compatible)  
 - Responsive design
 
 ---
@@ -19,7 +18,6 @@ This is a **full-stack Todo application** built with **Next.js** for the fronten
 
 - **Frontend:** Next.js 15+, TypeScript, React  
 - **Backend:** Node.js / Express  
-- **Database:** MongoDB  
 - **Hosting:** Vercel (frontend), backend can run locally
 
 ---
@@ -45,13 +43,13 @@ project-root/
 ## Screenshots
 
 **Homepage / Task List**  
-![Homepage](/homepage.png)
+![Homepage](public/home.png)
 
 **Add Task Page**  
-![Add Task](/add-task.png)
+![Add Task](public/add.png)
 
 **Update Task Page**  
-![Update Task](/update-task.png)
+![Update Task](public/upadte.png)
 
 
 ## Getting Started
@@ -101,26 +99,10 @@ npm start
 
 ---
 
-## Environment Variables
-
-```env
-MONGODB_URI=your_mongodb_connection_string
-PORT=5000
-```
 
 ---
 
-## Backend API Endpoints
 
-| Method | Endpoint          | Description          |
-|--------|-----------------|--------------------|
-| GET    | `/api/tasks`     | Get all tasks       |
-| POST   | `/api/tasks`     | Add a new task      |
-| GET    | `/api/tasks/:id` | Get a single task   |
-| PUT    | `/api/tasks/:id` | Update a task       |
-| DELETE | `/api/tasks/:id` | Delete a task       |
-
----
 
 ## Learn More
 
