@@ -42,6 +42,18 @@ project-root/
 
 ---
 
+## Screenshots
+
+**Homepage / Task List**  
+![Homepage](/homepage.png)
+
+**Add Task Page**  
+![Add Task](/add-task.png)
+
+**Update Task Page**  
+![Update Task](/update-task.png)
+
+
 ## Getting Started
 
 ### 1. Clone the repository
